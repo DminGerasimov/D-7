@@ -1,0 +1,31 @@
+{% load custom_filters %} 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новости за последнюю неделю</title>
+</head>
+<body>
+    <h1>Новости за последнюю неделю:</h1>
+        <hr>
+        <table>
+            {% for news in instance %}
+            <h3>
+                <a href="http://localhost:8000/news/{{ news.id }}"> 
+                    {{news.chapter | censor}} 
+                </a>
+
+                </h3> 
+            <p>(дата публикации: {{news.time_in | date:'d M Y'}})</p>
+            <p>
+                {{news.text | truncatechars:201 | censor}}
+            </p>
+
+            
+            {%endfor%}
+        </table>
+
+</body>
+</html>

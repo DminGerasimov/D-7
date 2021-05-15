@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load account %}
+ 
+{% block title %}
+Профиль пользователя {% user_display user %}
+{% endblock title %}
+ 
+{% block content %}
+<h2>Профиль пользователя {% user_display user %}</h2>
+    <hr>
+    <p>
+        
+    {% if user.is_authenticated %}
+        <p>
+            <button> <a href="{% url 'subscribe' %}">Подписаться на категорию новостей</a> </button>
+        </p>
+        {% else %}
+             <a href="{% url 'account_login' %}">Для подписки на новости необходимо авторизоваться</a>
+        {% endif %}        
+    </p>
+
+
+    <hr>
+{% endblock content %}

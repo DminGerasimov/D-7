@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+ 
+{% load custom_filters %}
+
+{% block title %}
+    {{ newsdetail.chapter | truncatechars:24 | censor }}
+{% endblock title %}
+ 
+{% block content %}
+
+    <h2>{{ newsdetail.chapter  | censor}}</h2>
+    <hr>
+   <p>(дата публикации: {{newsdetail.time_in | date:'d-M-Y h:m:s'}})</p>
+    {{ newsdetail.text | censor}}
+    <hr>
+    {% if user.is_authenticated %}
+        <p>
+            <a href="{{newsdetail.id}}/edit">Редактировать новость | </a>
+            <a href="{{newsdetail.id}}/delete">Удалить новость</a>
+        </p>
+        <p>
+            <a>Текущие категории публикации: 
+                {% for cat in category %}
+                {{cat}} 
+                {% endfor %}
+            </a>
+            <form action="{% url 'fastsubscribe' %}">
+                <input type="hidden" name = "category" value="{{category}}">
+                <input type="submit" value= "Подписаться">
+            </form>
+        </p>
+
+
+    {% else %}
+         <a href="{% url 'account_login' %}">Для редактирования или удаления новости/статьи необходимо авторизоваться</a>
+    {% endif %}
+{% endblock content %}

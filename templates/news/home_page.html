@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+ 
+{% block title %}
+Наши новости
+{% endblock title %}
+ 
+{% block content %}
+<h1>Портал новостей:</h1>
+    <hr>
+<a>Для просмотра списка статей, необходимо перейти по </a>
+<a href="{% url 'news_list' %}">ссылке</a>
+{% endblock content %}

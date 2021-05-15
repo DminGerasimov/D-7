@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+ 
+{% block title %}
+    Подписка на категории новостей
+{% endblock title %}
+ 
+{% block content %}
+    <h2>Подписаться на категорию</h2>
+    <hr>
+    
+    <form method="POST">
+        {% csrf_token %}
+
+        {{form}}
+        <hr>
+        <input type="submit" value="Подписаться">
+    </form>
+{% endblock content %}

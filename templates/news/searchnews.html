@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load custom_filters %} 
+ 
+{% block title %}
+Наши новости
+{% endblock title %}
+ 
+{% block content %}
+
+<form method="GET">
+    {{ filter.form }} <!-- Форму от фильтров за нас сделает django. А вот кнопку, увы придётся делать самому -->
+    <input type="submit" value="Найти">
+</form>
+
+<p>
+    Формат ввода данных:yyyy-mm-dd (например: 2021-03-11)
+</p>
+ 
+
+{% if searchnews %} <!-- Выводим news только если они есть -->
+    <h1>Список новостей ({{filter.qs | length}} публикаций):</h1>
+    <hr>
+    <table>
+        {% for news in filter.qs %}
+        <h3>
+            <a href="{{news.id}}">  <!-- заголовок статьи - гиперссылка на страницу со статьёй -->
+                {{news.chapter | censor}} 
+            </a>
+
+        <!-- </h3> <p>(дата публикации: {{news.time_in | date:'d M Y'}})</p> -->
+        <p>
+            {{news.text | truncatechars:51 | censor}}
+        </p>
+
+        
+        {%endfor%}
+    </table>
+
+{% else %} <!-- Если news нет, то говорим что news нет ;) -->
+    <h2>Новостей пока нет!</h2>
+{% endif %}
+  
+
+{% endblock content %}

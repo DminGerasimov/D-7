@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+ 
+{% load custom_filters %}
+
+{% block title %}
+    {{ newsdetail.chapter | truncatechars:24 | censor }}
+{% endblock title %}
+ 
+{% block content %}
+    <h2>Вы действительно хотите удалить эту статью/новость?</h2>
+
+    <h2>{{ newsdetail.chapter  | censor}}</h2>
+    <hr>
+   <p>(дата публикации: {{newsdetail.time_in | date:'d-M-Y h:m:s'}})</p>
+    {{ newsdetail.text | censor}}
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Подтвердить удаление">
+    </form>
+{% endblock content %}

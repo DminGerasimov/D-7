@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load account %}
+{% load custom_filters %} 
+ 
+{% block title %}
+Наши новости
+{% endblock title %}
+ 
+{% block content %}
+
+    {% if newslist %} <!-- Выводим news только если они есть -->
+        <h1>Новости нашего портала:</h1>
+        <hr>
+        <table>
+            {% for news in newslist %}
+            <h3>
+                <a href="{{news.id}}">  <!-- заголовок статьи - гиперссылка на страницу со статьёй -->
+                    {{news.chapter | censor}} 
+                </a>
+
+            <!-- </h3> <p>(дата публикации: {{news.time_in | date:'d M Y'}})</p> -->
+            <p>
+                {{news.text | truncatechars:51 | censor}}
+            </p>
+
+            
+            {%endfor%}
+        </table>
+
+        {% if is_paginated %}
+            <!-- Если доступна предыдущая страница, то даём ссылку на неё и самую первую страницу -->
+            {% if page_obj.has_previous %}
+                <a href="?page=1">Начало</a>
+                <a href="?page={{ page_obj.previous_page_number }}"><<<</a>
+            {% endif %}
+
+            <!-- Показываем только текущую страницу и ближайшие к ней, чтобы список не тянулся и не захламлял страницу -->
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <a>{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            <!-- Если есть следующая страница, то даём ссылку на неё и на самую последнюю страницу -->
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">>>></a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Конец</a>
+            {% endif %}
+    
+        {% endif %}
+    {% else %} <!-- Если news нет, то говорим что news нет ;) -->
+        <h2>Новостей пока нет!</h2>
+    {% endif %}
+
+    <hr>
+    <p>
+        {% if user.is_authenticated %}
+            <a href="{% url 'add_news' %}">
+                Добавить новость
+            </a>
+    </p>
+    <p>
+        {% if is_not_author %}
+            <button> <a href='accounts/add_author/'> Стать автором</a> </button>
+        {% endif %}
+    </p>
+    {% endif %}
+{% endblock content %}

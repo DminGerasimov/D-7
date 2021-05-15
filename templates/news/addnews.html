@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+ 
+{% block title %}
+    Добавление новости
+{% endblock title %}
+ 
+{% block content %}
+    <h2>Добавить новость</h2>
+    <hr>
+    
+    <form method="POST">
+        {% csrf_token %}
+
+        {{form}}
+        <hr>
+        <input type="submit" value="Сохранить новость/статью">
+    </form>
+{% endblock content %}
