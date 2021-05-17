@@ -23,5 +23,5 @@
     - tasks.weekly_mailing()
         (from news.management.commands._weekly_mailing_job import weekly_mailing_subscribers)
 
-p.s. Пароли акаунктов почты noreply@nsmnn.ru и redis в settings сброшены с целью декомпроментации. 
+p.s. Пароли акаунктов почты noreply@nsmnn.ru и redis в settings сброшены с целью декомпроментации.
 Для проверяющего готов предоставить в Slack
