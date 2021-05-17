@@ -155,7 +155,7 @@ DEFAULT_FROM_EMAIL = 'noreply@nsmnn.ru'
 EMAIL_HOST = 'mail.nic.ru' # адрес сервера Яндекс-почты
 EMAIL_PORT = 465 # порт smtp сервера
 EMAIL_HOST_USER = 'noreply@nsmnn.ru' # ваше имя пользователя, например если ваша почта user@yandex.ru, то сюда надо писать user, иными словами, это всё то что идёт до собаки
-EMAIL_HOST_PASSWORD = 'jHNMfEnCc2Rqdxw' # пароль от почты
+EMAIL_HOST_PASSWORD = '***' # пароль от почты
 EMAIL_USE_SSL = True # Яндекс использует ssl
 
 # Настройки планировщика задач
@@ -165,8 +165,8 @@ APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
 
 # Настройки CELERY
-CELERY_BROKER_URL = 'redis://GerasimovDmitry:xIzpmLY3GaWIBuXulrlFLsAu9d3RrTYp@redis-10060.c247.eu-west-1-1.ec2.cloud.redislabs.com:10060//'
-CELERY_RESULT_BACKEND = 'redis://GerasimovDmitry:xIzpmLY3GaWIBuXulrlFLsAu9d3RrTYp@redis-10060.c247.eu-west-1-1.ec2.cloud.redislabs.com:10060'
+CELERY_BROKER_URL = 'redis://GerasimovDmitry:***@redis-10060.c247.eu-west-1-1.ec2.cloud.redislabs.com:10060//'
+CELERY_RESULT_BACKEND = 'redis://GerasimovDmitry:***@redis-10060.c247.eu-west-1-1.ec2.cloud.redislabs.com:10060'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
